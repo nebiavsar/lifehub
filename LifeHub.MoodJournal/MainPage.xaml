@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifeHub.MoodJournal.MainPage"
+             BackgroundColor="#0F0F0F">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto" Padding="20" RowSpacing="15">
+        
+        <!-- Header Section -->
+        <Border Grid.Row="0" 
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="20"
+                Margin="0,10,0,0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                <Label Grid.Row="0"
+                       Text="💚 MoodJournal"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#00B386"
+                       HorizontalOptions="Center"/>
+                
+                <Label Grid.Row="1"
+                       Text="Capture your emotions and reflections"
+                       FontSize="14"
+                       TextColor="#66CCA3"
+                       HorizontalOptions="Center"
+                       FontAttributes="Italic"/>
+                
+                <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,10,0,0">
+                    <VerticalStackLayout Grid.Column="0" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalEntries}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#00B386"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Total Entries"
+                               FontSize="11"
+                               TextColor="#66CCA3"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding RecentMood}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#00B386"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Recent Mood"
+                               FontSize="11"
+                               TextColor="#66CCA3"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Journal Entries List -->
+        <VerticalStackLayout Grid.Row="1" Spacing="12">
+            <Label Text="Recent Entries (Last 7)"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#00B386"
+                   Margin="0,10,0,5"/>
+            
+            <ScrollView HeightRequest="400" VerticalScrollBarVisibility="Always">
+                <CollectionView ItemsSource="{Binding MoodEntries}"
+                                SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Spacing="15" Padding="30" HorizontalOptions="Center">
+                            <Label Text="📝"
+                                   FontSize="60"
+                                   HorizontalOptions="Center"
+                                   Opacity="0.3"/>
+                            <Label Text="No journal entries yet"
+                                   FontSize="18"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Record your first mood below to start tracking your emotional journey!"
+                                   FontSize="13"
+                                   TextColor="#4D4D4D"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="1"
+                                    Stroke="#2A2A2A"
+                                    BackgroundColor="#1A1A1A"
+                                    Padding="15"
+                                    Margin="0,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12"/>
+                                </Border.StrokeShape>
+                                
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="8" ColumnSpacing="12">
+                                    <!-- Mood Emoji -->
+                                    <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                           Text="{Binding MoodEmoji}"
+                                           FontSize="40"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                    
+                                    <!-- Mood Label -->
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Mood}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding MoodColor}"
+                                           VerticalOptions="Center"/>
+                                    
+                                    <!-- Timestamp -->
+                                    <Label Grid.Row="1" Grid.Column="1"
+                                           Text="{Binding RelativeTime}"
+                                           FontSize="11"
+                                           TextColor="#7FE7C4"
+                                           VerticalOptions="Center"/>
+                                    
+                                    <!-- Note -->
+                                    <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                            IsVisible="{Binding HasNote}"
+                                            StrokeThickness="0"
+                                            BackgroundColor="#0F0F0F"
+                                            Padding="10"
+                                            Margin="0,5,0,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Note}"
+                                               FontSize="13"
+                                               TextColor="#CCCCCC"
+                                               LineBreakMode="WordWrap"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Add Entry Section -->
+        <Border Grid.Row="2"
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="15"
+                Margin="0,10,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="12">
+                <Label Grid.Row="0"
+                       Text="Add New Entry"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#00B386"
+                       Margin="0,0,0,5"/>
+                
+                <!-- Mood Picker -->
+                <Picker Grid.Row="1"
+                        Title="How are you feeling?"
+                        TitleColor="#4D4D4D"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#0F0F0F"
+                        FontSize="14"
+                        SelectedItem="{Binding SelectedMood, Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>Amazing</x:String>
+                        <x:String>Happy</x:String>
+                        <x:String>Neutral</x:String>
+                        <x:String>Sad</x:String>
+                        <x:String>Stressed</x:String>
+                    </Picker.Items>
+                </Picker>
+                
+                <!-- Note Editor -->
+                <Editor Grid.Row="2"
+                        Text="{Binding NewNote, Mode=TwoWay}"
+                        Placeholder="Add a note about your day... (optional)"
+                        PlaceholderColor="#4D4D4D"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#0F0F0F"
+                        FontSize="13"
+                        HeightRequest="80"
+                        AutoSize="TextChanges"/>
+                
+                <!-- Add Button -->
+                <Button Grid.Row="3"
+                        Text="Save Entry"
+                        BackgroundColor="#00B386"
+                        TextColor="#0F0F0F"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Clicked="OnSaveEntryClicked"
+                        Command="{Binding SaveEntryCommand}"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+    </ScrollView>
+
+</ContentPage>

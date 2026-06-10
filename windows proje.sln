@@ -1,0 +1,42 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeHub.Dashboard", "LifeHub.Dashboard\LifeHub.Dashboard.csproj", "{C9F17C09-A702-465A-BCD3-BD99CD0E5097}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeHub.HabitTracker", "LifeHub.HabitTracker\LifeHub.HabitTracker.csproj", "{718A768A-4F0E-56C2-EE5E-7FA5A97B70CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeHub.MoodJournal", "LifeHub.MoodJournal\LifeHub.MoodJournal.csproj", "{44DE4212-34B0-673E-E674-0CB0A48FD6AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeHub.Planner", "LifeHub.Planner\LifeHub.Planner.csproj", "{EEE8A88C-6A1A-AEA4-7EE9-02FC447E5ECB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9F17C09-A702-465A-BCD3-BD99CD0E5097}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F17C09-A702-465A-BCD3-BD99CD0E5097}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F17C09-A702-465A-BCD3-BD99CD0E5097}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F17C09-A702-465A-BCD3-BD99CD0E5097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718A768A-4F0E-56C2-EE5E-7FA5A97B70CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718A768A-4F0E-56C2-EE5E-7FA5A97B70CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718A768A-4F0E-56C2-EE5E-7FA5A97B70CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718A768A-4F0E-56C2-EE5E-7FA5A97B70CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44DE4212-34B0-673E-E674-0CB0A48FD6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44DE4212-34B0-673E-E674-0CB0A48FD6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44DE4212-34B0-673E-E674-0CB0A48FD6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44DE4212-34B0-673E-E674-0CB0A48FD6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEE8A88C-6A1A-AEA4-7EE9-02FC447E5ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE8A88C-6A1A-AEA4-7EE9-02FC447E5ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE8A88C-6A1A-AEA4-7EE9-02FC447E5ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE8A88C-6A1A-AEA4-7EE9-02FC447E5ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10852384-F89F-4CDB-8258-C8B8B1C429B2}
+	EndGlobalSection
+EndGlobal

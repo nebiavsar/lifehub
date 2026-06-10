@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:LifeHub.Planner.Converters"
+             x:Class="LifeHub.Planner.MainPage"
+             BackgroundColor="#0F0F0F">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToTextDecorationConverter x:Key="BoolToTextDecorationConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto" Padding="20" RowSpacing="15">
+        
+        <!-- Header Section -->
+        <Border Grid.Row="0" 
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="20"
+                Margin="0,10,0,0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                <Label Grid.Row="0"
+                       Text="📅 Planner"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#009973"
+                       HorizontalOptions="Center"/>
+                
+                <Label Grid.Row="1"
+                       Text="Organize your day, achieve your goals"
+                       FontSize="14"
+                       TextColor="#4DB38E"
+                       HorizontalOptions="Center"
+                       FontAttributes="Italic"/>
+                
+                <Grid Grid.Row="2" ColumnDefinitions="*,*,*" ColumnSpacing="15" Margin="0,10,0,0">
+                    <VerticalStackLayout Grid.Column="0" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalTasks}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#009973"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Total"
+                               FontSize="11"
+                               TextColor="#4DB38E"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding CompletedTasks}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#009973"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Done"
+                               FontSize="11"
+                               TextColor="#4DB38E"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="2" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding PendingTasks}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#009973"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Pending"
+                               FontSize="11"
+                               TextColor="#4DB38E"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Tasks List -->
+        <VerticalStackLayout Grid.Row="1" Spacing="12">
+            <Label Text="Today's Tasks"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#009973"
+                   Margin="0,10,0,5"/>
+            
+            <ScrollView HeightRequest="400" VerticalScrollBarVisibility="Always">
+                <CollectionView ItemsSource="{Binding Tasks}"
+                                SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Spacing="15" Padding="30" HorizontalOptions="Center">
+                            <Label Text="📋"
+                                   FontSize="60"
+                                   HorizontalOptions="Center"
+                                   Opacity="0.3"/>
+                            <Label Text="No tasks yet"
+                                   FontSize="18"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Add your first task below to start planning your day!"
+                                   FontSize="13"
+                                   TextColor="#4D4D4D"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="1"
+                                    Stroke="#2A2A2A"
+                                    BackgroundColor="#1A1A1A"
+                                    Padding="15"
+                                    Margin="0,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12"/>
+                                </Border.StrokeShape>
+                                
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto" RowSpacing="8">
+                                    <!-- Checkbox -->
+                                    <CheckBox Grid.Row="0" Grid.Column="0"
+                                             IsChecked="{Binding IsCompleted}"
+                                             Color="#009973"
+                                             VerticalOptions="Center"/>
+                                    
+                                    <!-- Task Title -->
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="{Binding TitleColor}"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"
+                                           TextDecorations="{Binding IsCompleted, Converter={StaticResource BoolToTextDecorationConverter}}"/>
+                                    
+                                    <!-- Priority Badge -->
+                                    <Label Grid.Row="0" Grid.Column="2"
+                                           Text="{Binding PriorityIcon}"
+                                           FontSize="18"
+                                           VerticalOptions="Center"/>
+                                    
+                                    <!-- Description -->
+                                    <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                            IsVisible="{Binding HasDescription}"
+                                            StrokeThickness="0"
+                                            BackgroundColor="#0F0F0F"
+                                            Padding="10"
+                                            Margin="0,5,0,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="8"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Description}"
+                                               FontSize="12"
+                                               TextColor="#999999"
+                                               LineBreakMode="WordWrap"/>
+                                    </Border>
+                                    
+                                    <!-- Created Date -->
+                                    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                           Text="{Binding CreatedDateText}"
+                                           FontSize="11"
+                                           TextColor="#4DB38E"
+                                           Margin="0,5,0,0"/>
+                                    
+                                    <!-- Status -->
+                                    <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                                           Text="{Binding StatusText}"
+                                           FontSize="12"
+                                           TextColor="{Binding StatusColor}"
+                                           FontAttributes="Bold"
+                                           Margin="0,5,0,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Add Task Section -->
+        <Border Grid.Row="2"
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="15"
+                Margin="0,10,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+                <Label Grid.Row="0"
+                       Text="Add New Task"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#009973"
+                       Margin="0,0,0,5"/>
+                
+                <!-- Task Title Entry -->
+                <Entry Grid.Row="1"
+                       x:Name="TaskEntry"
+                       Text="{Binding NewTaskTitle, Mode=TwoWay}"
+                       Placeholder="Task title (e.g., Review project proposal)"
+                       PlaceholderColor="#4D4D4D"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0F0F0F"
+                       FontSize="14"/>
+                
+                <!-- Task Description -->
+                <Entry Grid.Row="2"
+                       Text="{Binding NewTaskDescription, Mode=TwoWay}"
+                       Placeholder="Description (optional)"
+                       PlaceholderColor="#4D4D4D"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0F0F0F"
+                       FontSize="13"/>
+                
+                <!-- Priority Picker -->
+                <Picker Grid.Row="3"
+                        Title="Priority"
+                        TitleColor="#4D4D4D"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="#0F0F0F"
+                        FontSize="13"
+                        SelectedItem="{Binding NewTaskPriority, Mode=TwoWay}">
+                    <Picker.Items>
+                        <x:String>High</x:String>
+                        <x:String>Normal</x:String>
+                        <x:String>Low</x:String>
+                    </Picker.Items>
+                </Picker>
+                
+                <!-- Add Button -->
+                <Button Grid.Row="4"
+                        Text="Add Task"
+                        BackgroundColor="#009973"
+                        TextColor="#0F0F0F"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Clicked="OnAddTaskClicked"
+                        Command="{Binding AddTaskCommand}"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+    </ScrollView>
+
+</ContentPage>

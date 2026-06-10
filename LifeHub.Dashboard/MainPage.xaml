@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifeHub.Dashboard.MainPage"
+             BackgroundColor="#0F0F0F">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+            
+            <!-- Header Section -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="#1A1A1A"
+                    Padding="25"
+                    Margin="0,10,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="🌿 LifeHub"
+                           FontSize="42"
+                           FontAttributes="Bold"
+                           TextColor="#00D9A3"
+                           HorizontalOptions="Center"/>
+                    
+                    <Label Text="Your Personal Life Management Ecosystem"
+                           FontSize="16"
+                           TextColor="#7FE7C4"
+                           HorizontalOptions="Center"
+                           FontAttributes="Italic"/>
+                    
+                    <BoxView HeightRequest="2"
+                             BackgroundColor="#00D9A3"
+                             Opacity="0.3"
+                             Margin="30,10,30,0"/>
+                    
+                    <Label Text="{Binding WelcomeMessage}"
+                           FontSize="14"
+                           TextColor="#B3B3B3"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Description Section -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="#1A1A1A"
+                    Padding="20">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="✨ What is LifeHub?"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#00D9A3"/>
+                    
+                    <Label TextColor="#CCCCCC"
+                           FontSize="14"
+                           LineHeight="1.5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="LifeHub is your comprehensive life management platform, designed to help you organize, track, and improve every aspect of your daily life. From building healthy habits to planning your day and reflecting on your emotions, LifeHub brings everything together in one beautiful, intuitive ecosystem."/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Apps Grid -->
+            <Label Text="📱 Our Apps"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#00D9A3"
+                   Margin="0,10,0,5"/>
+
+            <!-- HabitTracker Card -->
+            <Border StrokeThickness="2"
+                    Stroke="#00D9A3"
+                    BackgroundColor="#1A1A1A"
+                    Padding="0"
+                    Margin="0,5">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenHabitTrackerCommand}"/>
+                </Border.GestureRecognizers>
+                
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" Padding="20">
+                    <!-- Content -->
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8">
+                        <Label Text="🎯 HabitTracker"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"/>
+                        <Label Text="Build lasting habits, one day at a time"
+                               FontSize="13"
+                               TextColor="#999999"/>
+                    </VerticalStackLayout>
+                    
+                    <!-- Icon -->
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Text="✓"
+                           FontSize="40"
+                           TextColor="#00D9A3"
+                           Opacity="0.4"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+                    
+                    <!-- Features -->
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                       Spacing="6" Margin="0,15,0,0">
+                        <Label Text="• Track daily habits with simple checkboxes"
+                               FontSize="12" TextColor="#7FE7C4"/>
+                        <Label Text="• Monitor your progress over time"
+                               FontSize="12" TextColor="#7FE7C4"/>
+                        <Label Text="• Build consistency and discipline"
+                               FontSize="12" TextColor="#7FE7C4"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- MoodJournal Card -->
+            <Border StrokeThickness="2"
+                    Stroke="#00B386"
+                    BackgroundColor="#1A1A1A"
+                    Padding="0"
+                    Margin="0,5">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenMoodJournalCommand}"/>
+                </Border.GestureRecognizers>
+                
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" Padding="20">
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8">
+                        <Label Text="💚 MoodJournal"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#00B386"/>
+                        <Label Text="Capture your emotions and reflections"
+                               FontSize="13"
+                               TextColor="#999999"/>
+                    </VerticalStackLayout>
+                    
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Text="📝"
+                           FontSize="40"
+                           Opacity="0.4"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+                    
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                       Spacing="6" Margin="0,15,0,0">
+                        <Label Text="• Record your daily mood and feelings"
+                               FontSize="12" TextColor="#66CCA3"/>
+                        <Label Text="• Add personal notes and reflections"
+                               FontSize="12" TextColor="#66CCA3"/>
+                        <Label Text="• Track emotional patterns and growth"
+                               FontSize="12" TextColor="#66CCA3"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Planner Card -->
+            <Border StrokeThickness="2"
+                    Stroke="#009973"
+                    BackgroundColor="#1A1A1A"
+                    Padding="0"
+                    Margin="0,5">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18"/>
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenPlannerCommand}"/>
+                </Border.GestureRecognizers>
+                
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" Padding="20">
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8">
+                        <Label Text="📅 Planner"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#009973"/>
+                        <Label Text="Organize your day, achieve your goals"
+                               FontSize="13"
+                               TextColor="#999999"/>
+                    </VerticalStackLayout>
+                    
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Text="📋"
+                           FontSize="40"
+                           Opacity="0.4"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+                    
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                       Spacing="6" Margin="0,15,0,0">
+                        <Label Text="• Create and manage daily to-do lists"
+                               FontSize="12" TextColor="#4DB38E"/>
+                        <Label Text="• Mark tasks as complete with satisfaction"
+                               FontSize="12" TextColor="#4DB38E"/>
+                        <Label Text="• Stay organized and productive"
+                               FontSize="12" TextColor="#4DB38E"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Stats Section -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="#1A1A1A"
+                    Padding="20"
+                    Margin="0,15,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+                
+                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*,*" RowSpacing="15">
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalApps}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Apps"
+                               FontSize="12"
+                               TextColor="#7FE7C4"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5" HorizontalOptions="Center">
+                        <Label Text="{Binding FeaturesCount}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Features"
+                               FontSize="12"
+                               TextColor="#7FE7C4"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Row="0" Grid.Column="2" Spacing="5" HorizontalOptions="Center">
+                        <Label Text="{Binding Purpose}"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Purpose"
+                               FontSize="12"
+                               TextColor="#7FE7C4"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="Making life management simple, beautiful, and effective"
+                           FontSize="13"
+                           TextColor="#999999"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,10,0,0"/>
+                </Grid>
+            </Border>
+
+            <!-- Footer -->
+            <VerticalStackLayout Spacing="10" Margin="0,20,0,30">
+                <Label Text="Built with ❤️ using .NET MAUI"
+                       FontSize="12"
+                       TextColor="#666666"
+                       HorizontalOptions="Center"/>
+                <Label Text="{Binding CurrentDateTime}"
+                       FontSize="11"
+                       TextColor="#4D4D4D"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LifeHub.HabitTracker.MainPage"
+             BackgroundColor="#0F0F0F">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="15">
+        
+        <!-- Header Section -->
+        <Border Grid.Row="0" 
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="20"
+                Margin="0,10,0,0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="10">
+                <Label Grid.Row="0"
+                       Text="🎯 HabitTracker"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#00D9A3"
+                       HorizontalOptions="Center"/>
+                
+                <Label Grid.Row="1"
+                       Text="Build lasting habits, one day at a time"
+                       FontSize="14"
+                       TextColor="#7FE7C4"
+                       HorizontalOptions="Center"
+                       FontAttributes="Italic"/>
+                
+                <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0,10,0,0">
+                    <VerticalStackLayout Grid.Column="0" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding TotalHabits}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Total Habits"
+                               FontSize="11"
+                               TextColor="#7FE7C4"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" HorizontalOptions="Center">
+                        <Label Text="{Binding CompletedHabits}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#00D9A3"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Completed"
+                               FontSize="11"
+                               TextColor="#7FE7C4"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Habits List -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Your Habits"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#00D9A3"
+                       Margin="0,10,0,5"/>
+                
+                <CollectionView ItemsSource="{Binding Habits}"
+                                SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout Spacing="15" Padding="30" HorizontalOptions="Center">
+                            <Label Text="🌱"
+                                   FontSize="60"
+                                   HorizontalOptions="Center"
+                                   Opacity="0.3"/>
+                            <Label Text="No habits yet"
+                                   FontSize="18"
+                                   TextColor="#666666"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Add your first habit below to start building consistency!"
+                                   FontSize="13"
+                                   TextColor="#4D4D4D"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="1"
+                                    Stroke="#2A2A2A"
+                                    BackgroundColor="#1A1A1A"
+                                    Padding="15"
+                                    Margin="0,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12"/>
+                                </Border.StrokeShape>
+                                
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto" RowSpacing="8">
+                                    <!-- Checkbox -->
+                                    <CheckBox Grid.Row="0" Grid.Column="0"
+                                             IsChecked="{Binding IsCompleted}"
+                                             Color="#00D9A3"
+                                             VerticalOptions="Center"/>
+                                    
+                                    <!-- Habit Name -->
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding Name}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFFFF"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                    
+                                    <!-- Status Badge -->
+                                    <Label Grid.Row="0" Grid.Column="2"
+                                           Text="{Binding StatusText}"
+                                           FontSize="12"
+                                           TextColor="{Binding StatusColor}"
+                                           VerticalOptions="Center"
+                                           FontAttributes="Bold"/>
+                                    
+                                    <!-- Created Date -->
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                                           Text="{Binding CreatedDateText}"
+                                           FontSize="11"
+                                           TextColor="#7FE7C4"
+                                           Margin="10,0,0,0"/>
+                                    
+                                    <!-- Completed Date -->
+                                    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                                           Text="{Binding CompletedDateText}"
+                                           FontSize="11"
+                                           TextColor="#999999"
+                                           Margin="10,0,0,0"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Add Habit Section -->
+        <Border Grid.Row="2"
+                StrokeThickness="0"
+                BackgroundColor="#1A1A1A"
+                Padding="15"
+                Margin="0,10,0,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15"/>
+            </Border.StrokeShape>
+            
+            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="10" ColumnSpacing="10">
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                       Text="Add New Habit"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="#00D9A3"
+                       Margin="0,0,0,5"/>
+                
+                <Entry Grid.Row="1" Grid.Column="0"
+                       x:Name="HabitEntry"
+                       Text="{Binding NewHabitName, Mode=TwoWay}"
+                       Placeholder="Enter habit name (e.g., Morning Exercise)"
+                       PlaceholderColor="#4D4D4D"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0F0F0F"
+                       FontSize="14"
+                       VerticalOptions="Center"
+                       Completed="OnAddHabitClicked"/>
+                
+                <Button Grid.Row="1" Grid.Column="1"
+                        Text="Add"
+                        BackgroundColor="#00D9A3"
+                        TextColor="#0F0F0F"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        WidthRequest="90"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Command="{Binding AddHabitCommand}"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+
+</ContentPage>
